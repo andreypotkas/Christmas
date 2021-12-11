@@ -8,7 +8,7 @@ export function createToyCard(data:Array<Itoys>, num:number){
   const toyCardImg = createEl('div', 'toy-card-img');
   const toyCardTitle = createEl('div', 'toy-card-title');
   const toyCardDescription = createEl('div', 'toy-card-description');
-  toyCardImg.style.background=`url('../assets/toys/${num+1}.webp')`;
+  toyCardImg.style.background=`${arrToys[num].toyImg}`;
   toyCardImg.style.backgroundRepeat=`no-repeat`;
   toyCardImg.style.backgroundSize='contain';
   toyCardTitle.innerHTML=`${arrToys[num].toyName}`;

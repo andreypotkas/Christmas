@@ -1,6 +1,43 @@
 body{
     background: #192F2D;
 }
+header{
+display: flex;
+flex-direction: column;
+* {box-sizing: border-box;}
+form {
+  width: auto;
+  float: right;
+  margin-right: 30px;
+}
+input {
+  width: 250px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e;
+  background: #F9F0DA;
+  outline: none;
+  position: relative;
+  transition: .3s linear;
+}
+input:focus {
+  width: 300px;
+}
+button {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  position: absolute;
+}
+button::after{
+  content: "\f002";
+  font-size: 24px;
+  font-family: FontAwesome;
+  color: white;
+}
+}
 .toys-container{
     display: flex;
     .toys-container-settings{
