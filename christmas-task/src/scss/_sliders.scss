@@ -1,0 +1,21 @@
+.noUi-target {
+    margin-left: 20px !important;
+    width: 70% !important;
+    background: #1e637e !important;
+    height: 5px !important;
+}
+.noUi-handle:before, .noUi-handle:after {
+    content: "";
+    display: none !important;
+}
+
+.noUi-handle {
+    border: 1px solid #ffffff !important;
+    border-radius: 100% !important;
+    height: 15px !important;
+    width: 15px !important;
+}
+.noUi-horizontal .noUi-handle{
+    right: -5px !important;
+    top: -6px !important;
+}

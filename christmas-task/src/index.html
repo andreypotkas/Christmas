@@ -10,12 +10,14 @@
     <body>
         <header>
             <h1>Christmas task</h1>
-            <form>
+            <form class="search">
               <input type="text" placeholder="Искать здесь...">
               <button type="submit"></button>
             </form>
+            
         </header>
         <main>
+          
             <div class="toys-container">
               <div class="toys-container-settings">
                 <h3>сортировка</h3>
@@ -38,11 +40,17 @@
                 </div>
                 <h3>количество экземпляров</h3>
                 <div class="toys-count">
-                    <input type="range" value="50"/> 
+                  <input type="number" id="input-0">
+                  <div id="slider-count">
+                  </div>
+                  <input type="number" id="input-1">
                 </div>
                 <h3>год приобретения</h3>
                 <div class="toys-year">
-                  <input type="range" value="50"/> 
+                  <input type="number" id="input-2">
+                  <div id="slider-year">
+                  </div>
+                  <input type="number" id="input-3">
               </div>
               <h3>цвет</h3>
               <div class="toys-color">
@@ -75,7 +83,6 @@
                 Copyright <a href="https://newsapi.org">NewsAPI</a>
             </p>
         </footer>
-
         <script src="./index.js"></script>
     </body>
 </html>

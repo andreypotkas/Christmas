@@ -1,20 +1,13 @@
 import "./scss/style.scss";
 import { createToyCard } from "./components/card";
 import { arrToys, Itoys } from "./components/example";
+import {createSliders} from "./components/sliders";
 
-// по алфавиту
-console.log(arrToys);
+createSliders();
+
+
 
 sortByName(arrToys);
-
-console.log(arrToys);
-// по алфавиту в обратном порядке
-/* arrToys.sort(function(a,b){
-    let textA = a.toyName.toUpperCase();
-    let textB = b.toyName.toUpperCase();
-    return textA.localeCompare(textB);
-}).reverse(); */
-
 
 
 for (let i = 0; i<arrToys.length;i++){
