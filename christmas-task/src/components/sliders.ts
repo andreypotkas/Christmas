@@ -36,11 +36,7 @@ export function createSliders(){
                     setRangeSlider(index, (<HTMLInputElement>e.currentTarget).value);
                 });
             });
-        
-        
-        
-        
-        }
+}
         if(sliderYear){
             noUiSlider.create(sliderYear, {
                 start: [1940, 2020],

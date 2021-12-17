@@ -26,6 +26,11 @@
                 left: 0px;
                 position: relative;
                 }
+            &:active{
+                border: red 2px solid;
+                
+            }
+            
         }
         button:nth-child(1){
             background-image: url('../assets/forms/bell.svg');

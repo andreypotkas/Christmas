@@ -1,13 +1,19 @@
 import { arrToys} from './example';
 import { Itoys } from './example';
 
-const container = document.querySelector('.toys-container-cards') as HTMLElement;
+export const container = document.querySelector('.toys-container-cards') as HTMLElement;
 
 export function createToyCard(data:Array<Itoys>, num:number){
   const toyCard = createEl('div','toy-card');
   const toyCardImg = createEl('div', 'toy-card-img');
   const toyCardTitle = createEl('div', 'toy-card-title');
   const toyCardDescription = createEl('div', 'toy-card-description');
+  const favoriteCheck = new Image();
+  favoriteCheck.src='../assets/1f499.png';
+  favoriteCheck.classList.add('favorite-check');
+  if(!arrToys[num].toyFavorite==true){
+    favoriteCheck.classList.add('hide');
+  }
   toyCardImg.style.background=`${arrToys[num].toyImg}`;
   toyCardImg.style.backgroundRepeat=`no-repeat`;
   toyCardImg.style.backgroundSize='contain';
@@ -25,6 +31,7 @@ export function createToyCard(data:Array<Itoys>, num:number){
     toyCard.append(toyCardTitle);
     toyCard.append(toyCardImg);
     toyCard.append(toyCardDescription);
+    toyCardImg.append(favoriteCheck);
 }
 
 function createEl (tagName:string, classAdd:string):HTMLElement{

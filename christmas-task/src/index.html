@@ -14,7 +14,7 @@
               <input type="text" placeholder="Искать здесь...">
               <button type="submit"></button>
             </form>
-            
+            <div class="favorite-toys-count" id="favorite-toys-count">0</div>
         </header>
         <main>
           
@@ -22,7 +22,7 @@
               <div class="toys-container-settings">
                 <h3>сортировка</h3>
                 <div class="toys-sort">
-                  <select class="sort-list">
+                  <select class="sort-list" id="sort-list">
                     <option>По названию от "А" до "Я"</option>
                     <option>По названию от "Я" до "А"</option>
                     <option>По количеству по возрастанию</option>
@@ -47,10 +47,10 @@
                 </div>
                 <h3>год приобретения</h3>
                 <div class="toys-year">
-                  <input type="number" id="input-2">
+                  <input type="number" id="input-2" step="10">
                   <div id="slider-year">
                   </div>
-                  <input type="number" id="input-3">
+                  <input type="number" id="input-3" step="10">
               </div>
               <h3>цвет</h3>
               <div class="toys-color">
