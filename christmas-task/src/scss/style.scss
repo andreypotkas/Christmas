@@ -6,6 +6,28 @@
 body{
   background: #192F2D;
 }
+#message-container{
+  border-radius: 10px;
+  display: none;
+  background: white;
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 300px;
+  height: 200px;
+  text-align: center;
+  #close-message{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border:none;
+  }
+  #message{
+    position: relative;
+    top:45%;
+      
+  }
+}
 header{
   display: flex;
   #favorite-toys-count{

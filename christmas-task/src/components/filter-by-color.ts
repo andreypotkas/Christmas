@@ -1,22 +1,19 @@
 
-import { filt } from "..";
+import { filt, isFilters } from "..";
 import { arrToys } from "./example";
-import { availableForms, isFilterByForm } from "./filter-by-form";
+import { availableForms} from "./filter-by-form";
 import { availableSizes } from "./filter-by-size";
 export let allColors:string[]=['белый', 'желтый', 'красный', 'синий', 'зелёный'];
 export let availableColors:string[] =[];
-export let isFilterByColor = false;
-export function filterByColor (){
+
+
 const colorContainer = document.getElementById('toys-color-container') as HTMLElement;
-const toyColors:HTMLCollection = colorContainer.getElementsByTagName('button'); 
-console.log(toyColors);
+const toyColors:HTMLCollection = colorContainer.getElementsByTagName('button');
 
-
-
-
+export function filterByColor (){
     for (let i =0; i<toyColors.length; i++){
         toyColors[i].addEventListener('click', ()=>{
-            isFilterByColor = true;
+            isFilters.isFilterByColor = true;
             if(!toyColors[i].classList.contains('active-btn')){
                 availableColors.push(allColors[i]);
                 console.log(availableColors);
@@ -31,4 +28,14 @@ console.log(toyColors);
         })
     }
     
+  };
+
+
+  export function resetFilterByColor (){
+    isFilters.isFilterByColor = false;
+    for (let i =0; i<toyColors.length; i++){
+            if(toyColors[i].classList.contains('active-btn')){
+                toyColors[i].classList.remove('active-btn');
+        }
+    }
   };

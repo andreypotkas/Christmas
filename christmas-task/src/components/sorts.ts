@@ -4,6 +4,10 @@ import {Itoys} from './example'
 import { arrToys } from "./example";
 import { container } from "./card";
 import { createToyCard } from "./card";
+import { filt } from "..";
+import { availableForms } from "./filter-by-form";
+import { availableColors } from "./filter-by-color";
+import { availableSizes } from "./filter-by-size";
   
 
 
@@ -34,8 +38,6 @@ sortList?.addEventListener('change', function():void{
         sortByCount(arr);
         arr.reverse();
     }
-    for (let i = 0; i<arr.length;i++){//create cards on page
-        createToyCard(arr, i);
-    }
+    filt(arr, availableForms, availableColors, availableSizes);
   });
 }

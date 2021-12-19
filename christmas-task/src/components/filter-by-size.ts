@@ -1,12 +1,12 @@
 
-import { filt } from "..";
+import { filt, isFilters } from "..";
 import { arrToys } from "./example";
 
 import { availableColors } from "./filter-by-color";
 import { availableForms } from "./filter-by-form";
 
 
-export let isFilterBySise = false;
+
 export let availableSizes:string[] =[];
 const toySizeContainer = document.getElementById('toys-size') as HTMLElement;
 const toySizes: HTMLInputElement[] =[];
@@ -20,10 +20,10 @@ export let allSizes:string[]=['малый', 'средний', 'большой'];
 export function filterBySize (){
     for (let i =0; i<toySizes.length; i++){
         toySizes[i].addEventListener('change', ()=>{
-            isFilterBySise = true;
+           isFilters.isFilterBySise = true;
             if(toySizes[i].checked){
                 availableSizes.push(allSizes[i]);
-                console.log(availableSizes);
+                
             }else{
                 if (availableSizes.indexOf(allSizes[i]) > -1) {
                 availableSizes.splice(availableSizes.indexOf(allSizes[i]), 1);
@@ -31,5 +31,15 @@ export function filterBySize (){
             }
             filt (arrToys, availableForms, availableColors, availableSizes);
         })
+    }
+}
+
+export function resetFilterBySize (){
+    for (let i =0; i<toySizes.length; i++){
+        
+           isFilters.isFilterBySise = false;
+            if(toySizes[i].checked){
+                toySizes[i].checked=false;
+            }
     }
 }

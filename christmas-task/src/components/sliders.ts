@@ -5,19 +5,18 @@ import { TargetElement } from "./nouislider";
 import { Itoys } from './example';
 import { arrToys } from './example';
 import { container, createToyCard } from './card';
-import { filt } from '..';
+import { filt, isFilters } from '..';
 import { availableForms } from './filter-by-form';
-import { availableColors, isFilterByColor } from './filter-by-color';
-import { availableSizes, isFilterBySise } from './filter-by-size';
+import { availableColors} from './filter-by-color';
+import { availableSizes } from './filter-by-size';
 
-export let isFilterByCount = false;
-export let isFilterByYear = false;
+
 
 export const state = {
     sliderCountValue: {min:0, max:12},
     sliderYearValue: {min:1940, max:2020}
   }
-const sliderCount = document.getElementById('slider-count') as TargetElement;
+export const sliderCount = document.getElementById('slider-count') as TargetElement;
 sliderCount.addEventListener('click', ()=>{
     filt (arrToys, availableForms, availableColors, availableSizes);
 })
@@ -45,9 +44,8 @@ export function createSliders(){
         const inputs:Array<HTMLInputElement> = [input0, input1];
         
             sliderCount.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
-                isFilterByCount = true;
+                 /* isFilters.isFilterByCount = true; */
                 inputs[String(handle)].value = Math.round(values[String(handle)]);
-                
                 state.sliderCountValue.min=Math.round(values[String(0)]);
                 state.sliderCountValue.max=Math.round(values[String(1)]);
                 /*  */
@@ -82,7 +80,7 @@ export function createSliders(){
             
                 sliderYear.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
                     inputs[String(handle)].value = Math.round(values[String(handle)]);
-                    isFilterByYear =true;
+                    /* isFilterByYear =true; */
                     
                     
                 state.sliderYearValue.min=Math.round(values[String(0)]);
@@ -92,8 +90,12 @@ export function createSliders(){
             
                 const setRangeSlider = (i:number, value:string) => {
                     let arr:Array<string> = [];
+                    console.log(value);
+                    console.log(i);
+                    
                     arr[i] = value;
                     sliderYear.noUiSlider.set(arr);
+                    console.log(arr);
                 };
             
                 inputs.forEach((el, index:number) => {
@@ -103,4 +105,10 @@ export function createSliders(){
                 });
             }
 
+}
+
+export function resetSliders(){
+  sliderCount.noUiSlider.set([0, 12]);
+  sliderYear.noUiSlider.set([1940, 2020]);
+ 
 }

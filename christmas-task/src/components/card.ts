@@ -11,9 +11,7 @@ export function createToyCard(data:Array<Itoys>, num:number){
   const favoriteCheckImg = new Image();
   favoriteCheckImg.src='../assets/1f499.png';
   favoriteCheckImg.classList.add('favorite-check');
-  if(!data[num].toyFavorite==true){
-    favoriteCheckImg.classList.add('hide');
-  }
+  favoriteCheckImg.classList.add('hide');
   toyCardImg.style.background=`${data[num].toyImg}`;
   toyCardImg.style.backgroundRepeat=`no-repeat`;
   toyCardImg.style.backgroundSize='contain';

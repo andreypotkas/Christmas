@@ -17,7 +17,12 @@
             <div class="favorite-toys-count" id="favorite-toys-count">0</div>
         </header>
         <main>
-          
+          <div id="message-container">
+            <div id="message"></div>
+            <button type="button" class="close" aria-label="Close" id="close-message">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
             <div class="toys-container">
               <div class="toys-container-settings">
                 <h3>сортировка</h3>
@@ -46,7 +51,7 @@
                   <input type="number" id="input-1">
                 </div>
                 <h3>год приобретения</h3>
-                <div class="toys-year">
+                <div class="toys-year" id="toys-year">
                   <input type="number" id="input-2" step="10">
                   <div id="slider-year">
                   </div>
@@ -74,7 +79,7 @@
                 <input type="checkbox" id="toys-favorite">
               </div>
               <div class="toys-settings-buttons">
-                <button>сбросить фильтры</button>
+                <button id="reset-filters">сбросить фильтры</button>
                 <button>сбросить настройки</button>
               </div>
               </div>
@@ -86,6 +91,7 @@
                 Copyright <a href="https://newsapi.org">NewsAPI</a>
             </p>
         </footer>
+        
         <script src="./index.js"></script>
     </body>
 </html>

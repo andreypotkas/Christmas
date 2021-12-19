@@ -1,13 +1,13 @@
 
 import { arrToys } from "./example";
-import { favoriteCheck } from "./favorite";
+
 import { availableColors } from "./filter-by-color";
 import { availableSizes } from "./filter-by-size";
 import { Itoys } from "./example";
 import { container, createToyCard } from "./card";
-import {filt} from '../index';
+import {filt, isFilters} from '../index';
 export let availableForms:string[] =[];
-export let isFilterByForm = false;
+
 
 const toyFormContainer = document.getElementById('toys-form-container') as HTMLElement;
 const toyForms:HTMLCollection = toyFormContainer.getElementsByTagName('button'); 
@@ -16,7 +16,7 @@ export let allForms:string[]=['колокольчик', 'шар', 'шишка', 
 export function filterByForm (){
 for (let i =0; i<toyForms.length; i++){
     toyForms[i].addEventListener('click', ()=>{
-        isFilterByForm = true;
+        isFilters.isFilterByForm = true;
         if(!toyForms[i].classList.contains('active-btn')){
             availableForms.push(allForms[i]);
         }else{
@@ -27,6 +27,14 @@ for (let i =0; i<toyForms.length; i++){
     })
   }
 }
+export function resetFilterByForm (){
+    for (let i =0; i<toyForms.length; i++){
+            if(toyForms[i].classList.contains('active-btn')){
+                toyForms[i].classList.remove('active-btn')
+            }
+      }
+      isFilters.isFilterByForm=false;
+    }
 /* function filterForm(arr:Itoys[], form:string[]):Itoys[]{
     let filtredArr:Itoys[] = arr.filter(item=>{return form.indexOf(item.toyShape)!=-1});
     container.innerHTML='';
