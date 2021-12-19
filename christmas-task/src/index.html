@@ -30,16 +30,16 @@
                   </select>
                 </div>
                 <h3>форма</h3>
-                <div class="toys-form">
-                  <button class="toys-form-item"></button>
-                  <button class="toys-form-item"></button>
-                  <button class="toys-form-item"></button>
-                  <button class="toys-form-item"></button>
-                  <button class="toys-form-item"></button>
-                  <button class="toys-form-item"></button>
+                <div class="toys-form" id="toys-form-container">
+                  <button class="toys-form-item bell" ></button>
+                  <button class="toys-form-item ball"></button>
+                  <button class="toys-form-item pine"></button>
+                  <button class="toys-form-item snowflake"></button>
+                  <button class="toys-form-item star"></button>
+                  <button class="toys-form-item birdtoy"></button>
                 </div>
                 <h3>количество экземпляров</h3>
-                <div class="toys-count">
+                <div class="toys-count" id="toys-count">
                   <input type="number" id="input-0">
                   <div id="slider-count">
                   </div>
@@ -53,22 +53,25 @@
                   <input type="number" id="input-3" step="10">
               </div>
               <h3>цвет</h3>
-              <div class="toys-color">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+              <div class="toys-color" id="toys-color-container">
+                <button class="white"></button>
+                <button class="yellow"></button>
+                <button class="red"></button>
+                <button class="blue"></button>
+                <button class="green"></button>
               </div>
               <h3>размер</h3>
-              <div class="toys-size">
-                <input type="checkbox">
-                <input type="checkbox">
-                <input type="checkbox">
+              <div class="toys-size" id="toys-size">
+                <p>малый</p>
+                <input type="checkbox" id="small-size">
+                <p>средний</p>
+                <input type="checkbox" id="average-size">
+                <p>большой</p>
+                <input type="checkbox" id="big-size">
               </div>
-              <div class="toys-favorite">
+              <div class="toys-favorite" >
                 <h3>только любимые</h3>
-                <input type="checkbox">
+                <input type="checkbox" id="toys-favorite">
               </div>
               <div class="toys-settings-buttons">
                 <button>сбросить фильтры</button>
