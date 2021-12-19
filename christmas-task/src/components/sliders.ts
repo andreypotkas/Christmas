@@ -19,18 +19,20 @@ export const state = {
 export const sliderCount = document.getElementById('slider-count') as TargetElement;
 sliderCount.addEventListener('click', ()=>{
     filt (arrToys, availableForms, availableColors, availableSizes);
-})
+    localStorage.setItem('sliderCount', `${sliderCount.noUiSlider.get()}`);
+    });
 
 
   /*    */
 const sliderYear = document.getElementById('slider-year')as TargetElement;
 sliderYear.addEventListener('click', ()=>{
     filt (arrToys, availableForms, availableColors, availableSizes);
+    localStorage.setItem('sliderYear', `${sliderYear.noUiSlider.get()}`);
 })
 let filtredArr:Itoys[];
 export function createSliders(){
     if(sliderCount){
-        noUiSlider.create(sliderCount, {
+        noUiSlider.create(sliderCount, {   
             start: [0, 12],
             connect: true,
             step:1,
@@ -53,9 +55,9 @@ export function createSliders(){
         
             const setRangeSlider = (i:number, value:string) => {
                 let arr:Array<string> = [];
-                
                 arr[i] = value;
                 sliderCount.noUiSlider.set(arr);
+                
             };
         
             inputs.forEach((el, index:number) => {
@@ -80,22 +82,16 @@ export function createSliders(){
             
                 sliderYear.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
                     inputs[String(handle)].value = Math.round(values[String(handle)]);
-                    /* isFilterByYear =true; */
-                    
                     
                 state.sliderYearValue.min=Math.round(values[String(0)]);
                 state.sliderYearValue.max=Math.round(values[String(1)]);
-                /* filt (arrToys, availableForms, availableColors, availableSizes); */
+                
                 });
             
                 const setRangeSlider = (i:number, value:string) => {
                     let arr:Array<string> = [];
-                    console.log(value);
-                    console.log(i);
-                    
                     arr[i] = value;
                     sliderYear.noUiSlider.set(arr);
-                    console.log(arr);
                 };
             
                 inputs.forEach((el, index:number) => {
@@ -104,7 +100,12 @@ export function createSliders(){
                     });
                 });
             }
-
+                if(localStorage.getItem('sliderCount')){
+                    sliderCount.noUiSlider.set((<string>localStorage.getItem('sliderCount')).split(','));
+                }
+                if(localStorage.getItem('sliderYear')){
+                    sliderYear.noUiSlider.set((<string>localStorage.getItem('sliderYear')).split(','));
+                }
 }
 
 export function resetSliders(){

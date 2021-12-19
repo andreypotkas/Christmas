@@ -4,7 +4,7 @@ import {Itoys} from './example'
 import { arrToys } from "./example";
 import { container } from "./card";
 import { createToyCard } from "./card";
-import { filt } from "..";
+import { filt, myStorage } from "..";
 import { availableForms } from "./filter-by-form";
 import { availableColors } from "./filter-by-color";
 import { availableSizes } from "./filter-by-size";
@@ -25,6 +25,9 @@ export function sortByCount (arr:Itoys[]){
 
 let sortList = document.getElementById('sort-list') as HTMLSelectElement;
 export function sortByNameCount (arr:Itoys[]){
+  if(localStorage.getItem('selectedIndex')){
+    sortList.selectedIndex=Number(localStorage.getItem('selectedIndex'));
+  }
 sortList?.addEventListener('change', function():void{
     container.innerHTML='';
     if(sortList.selectedIndex==0){
@@ -38,6 +41,7 @@ sortList?.addEventListener('change', function():void{
         sortByCount(arr);
         arr.reverse();
     }
+    localStorage.setItem('selectedIndex', `${sortList.selectedIndex}`);
     filt(arr, availableForms, availableColors, availableSizes);
   });
 }

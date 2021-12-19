@@ -1,4 +1,18 @@
+#clear-search::after{
+  content: '';
+}
+#clear-search{
+  position: relative;
+  left: -120px;
+  top: 5px;
+  background: none;
+  border:none;
+  font-size: 32px;
+  width: 60px;
+}
 .search {
+  position: relative;
+  
   align-self: center;
     width: auto;
     float: right;

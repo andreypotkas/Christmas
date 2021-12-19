@@ -10,10 +10,12 @@
     <body>
         <header>
             <h1>Christmas task</h1>
-            <form class="search">
-              <input type="text" placeholder="Искать здесь...">
+            <form class="search" autocomplete="off">
+              <input type="text" placeholder="Искать здесь..." autofocus id="search-input">
+              
               <button type="submit"></button>
             </form>
+            <button id="clear-search">&times;</button>
             <div class="favorite-toys-count" id="favorite-toys-count">0</div>
         </header>
         <main>
@@ -80,7 +82,7 @@
               </div>
               <div class="toys-settings-buttons">
                 <button id="reset-filters">сбросить фильтры</button>
-                <button>сбросить настройки</button>
+                <button id="reset-settings">сбросить настройки</button>
               </div>
               </div>
               <div class="toys-container-cards"></div>

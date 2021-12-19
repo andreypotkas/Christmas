@@ -8,6 +8,17 @@ import {sortByCount, sortByName, sortByNameCount} from './components/sorts'
 import { allColors, availableColors, filterByColor, resetFilterByColor} from "./components/filter-by-color";
 import {allForms, availableForms, filterByForm, resetFilterByForm} from './components/filter-by-form';
 import { filterBySize, availableSizes, allSizes, resetFilterBySize} from "./components/filter-by-size";
+import { searchInput} from "./components/search";
+
+document.getElementById('clear-search')?.addEventListener('click', ()=>{
+  searchInput.value='';
+  filt(arrToys, availableForms, availableColors, availableSizes);
+})
+export let myStorage = window.localStorage;
+
+
+localStorage.setItem('Sizes', `${availableSizes}`);
+
 
 for (let i = 0; i<arrToys.length;i++){//create cards on page
     createToyCard(arrToys, i);
@@ -33,13 +44,19 @@ createSliders();
 addFavorite();
 filterByForm();
 filterByColor();
+let availableCheck = [true, false];
+export let favoriteCheck = document.getElementById('toys-favorite') as HTMLInputElement;
+if(localStorage.getItem('favorite')=='true'){
+    favoriteCheck.checked=true;
+}
 
-export const favoriteCheck = document.getElementById('toys-favorite') as HTMLInputElement;
 favoriteCheck.addEventListener('change', ()=>{
+  localStorage.setItem('favorite', `${favoriteCheck.checked}`);
   filt (arrToys, availableForms, availableColors, availableSizes);
+  
 })
 
-let availableCheck = [true, false];
+
 
 export function filt (arr:Itoys[], form:string[], color:string[], size:string[]){
   if(favoriteCheck.checked){
@@ -47,13 +64,13 @@ export function filt (arr:Itoys[], form:string[], color:string[], size:string[])
   }else if(!favoriteCheck.checked){
     availableCheck=[true, false];
   }
-  if(isFilters.isFilterByForm == false){
+  if(isFilters.isFilterByForm == false && !localStorage.getItem('forms')){
     form=allForms;
   }
-  if(isFilters.isFilterByColor == false){
+  if(isFilters.isFilterByColor == false && !localStorage.getItem('colors')){
     color=allColors;
   }
-  if(isFilters.isFilterBySise == false){
+  if(isFilters.isFilterBySise == false && !localStorage.getItem('sizes')){
     size=allSizes;
   }
   let sortArr = arr.filter(item=>{
@@ -65,6 +82,7 @@ export function filt (arr:Itoys[], form:string[], color:string[], size:string[])
       && Number(item.toyYear)>=state.sliderYearValue.min 
       && Number(item.toyYear)<=state.sliderYearValue.max
       && availableCheck.includes(item.toyFavorite)
+      && item.toyName.toLowerCase().includes(searchInput.value.toLowerCase())
     });
       sortByNameCount(sortArr);
 container.innerHTML='';
@@ -73,10 +91,23 @@ for (let i = 0; i<sortArr.length;i++){
   }
 }
 
-
+filt (arrToys, availableForms, availableColors, availableSizes);
 
 /* let sortArray = arr.filter(item=>['shape', 'color', 'size'].every((key)=>{
      if (filters[key].length === 0) return true;
      const keyToy = `toy${key}`
      return filters[key].includes(item[key])
     })) */
+const resetSettings = document.getElementById('reset-settings');
+resetSettings?.addEventListener('click',()=>{
+  localStorage.clear();
+  resetFilterBySize();
+  resetFilterByForm();
+  resetFilterByColor();
+  resetSliders();
+  favoriteCheck.checked=false;
+  filt (arrToys, availableForms, availableColors, availableSizes);
+})
+searchInput.addEventListener('keydown', ()=>{
+  filt(arrToys, availableForms, availableColors, availableSizes);
+});

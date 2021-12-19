@@ -7,7 +7,10 @@ import { Itoys } from "./example";
 import { container, createToyCard } from "./card";
 import {filt, isFilters} from '../index';
 export let availableForms:string[] =[];
-
+if(localStorage.getItem('forms')){
+    availableForms=(<string>localStorage.getItem('forms')).split(',');
+    
+}
 
 const toyFormContainer = document.getElementById('toys-form-container') as HTMLElement;
 const toyForms:HTMLCollection = toyFormContainer.getElementsByTagName('button'); 
@@ -15,6 +18,11 @@ export let allForms:string[]=['колокольчик', 'шар', 'шишка', 
 
 export function filterByForm (){
 for (let i =0; i<toyForms.length; i++){
+    if(localStorage.getItem('forms')){
+        if(availableForms.includes(allForms[i])){
+            toyForms[i].classList.add('active-btn')
+    }
+}
     toyForms[i].addEventListener('click', ()=>{
         isFilters.isFilterByForm = true;
         if(!toyForms[i].classList.contains('active-btn')){
@@ -24,6 +32,7 @@ for (let i =0; i<toyForms.length; i++){
             }
             filt(arrToys, availableForms, availableColors, availableSizes);
             toyForms[i].classList.toggle('active-btn');
+            localStorage.setItem('forms', `${availableForms}`);
     })
   }
 }
