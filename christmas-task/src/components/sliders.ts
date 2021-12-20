@@ -1,38 +1,38 @@
 import 'nouislider/dist/nouislider.css';
 import * as noUiSlider from 'nouislider';
-import { cssClasses } from "nouislider";
 import { TargetElement } from "./nouislider";
 import { Itoys } from './example';
 import { arrToys } from './example';
-import { container, createToyCard } from './card';
-import { filt, isFilters } from '..';
-import { availableForms } from './filter-by-form';
-import { availableColors} from './filter-by-color';
-import { availableSizes } from './filter-by-size';
+import { filt} from '..';
+
+import {available} from '../index'
+
 
 
 
 export const state = {
     sliderCountValue: {min:0, max:12},
-    sliderYearValue: {min:1940, max:2020}
+    sliderYearValue: {min:1940, max:2020},
+    sliderCount: document.getElementById('slider-count') as TargetElement,
+    sliderYear:  document.getElementById('slider-year')as TargetElement
   }
-export const sliderCount = document.getElementById('slider-count') as TargetElement;
-sliderCount.addEventListener('click', ()=>{
-    filt (arrToys, availableForms, availableColors, availableSizes);
-    localStorage.setItem('sliderCount', `${sliderCount.noUiSlider.get()}`);
+
+state.sliderCount.addEventListener('click', ()=>{
+    filt (arrToys, available.forms, available.colors, available.sizes);
+    localStorage.setItem('sliderCount', `${state.sliderCount.noUiSlider.get()}`);
     });
 
 
 
-const sliderYear = document.getElementById('slider-year')as TargetElement;
-sliderYear.addEventListener('click', ()=>{
-    filt (arrToys, availableForms, availableColors, availableSizes);
-    localStorage.setItem('sliderYear', `${sliderYear.noUiSlider.get()}`);
+
+state.sliderYear.addEventListener('click', ()=>{
+    filt (arrToys, available.forms, available.colors, available.sizes);
+    localStorage.setItem('sliderYear', `${state.sliderYear.noUiSlider.get()}`);
 })
 let filtredArr:Itoys[];
 export function createSliders(){
-    if(sliderCount){
-        noUiSlider.create(sliderCount, {   
+    if(state.sliderCount){
+        noUiSlider.create(state.sliderCount, {   
             start: [0, 12],
             connect: true,
             step:1,
@@ -45,7 +45,7 @@ export function createSliders(){
         const input1 = document.getElementById('input-1') as HTMLInputElement;
         const inputs:Array<HTMLInputElement> = [input0, input1];
         
-            sliderCount.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
+            state.sliderCount.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
                 inputs[String(handle)].value = Math.round(values[String(handle)]);
                 state.sliderCountValue.min=Math.round(values[String(0)]);
                 state.sliderCountValue.max=Math.round(values[String(1)]);
@@ -54,7 +54,7 @@ export function createSliders(){
             const setRangeSlider = (i:number, value:string) => {
                 let arr:Array<string> = [];
                 arr[i] = value;
-                sliderCount.noUiSlider.set(arr);
+                state.sliderCount.noUiSlider.set(arr);
                 
             };
         
@@ -64,8 +64,8 @@ export function createSliders(){
                 });
             });
 }
-        if(sliderYear){
-            noUiSlider.create(sliderYear, {
+        if(state.sliderYear){
+            noUiSlider.create(state.sliderYear, {
                 start: [1940, 2020],
                 connect: true,
                 step:10,
@@ -78,7 +78,7 @@ export function createSliders(){
             const input3 = document.getElementById('input-3') as HTMLInputElement;
             const inputs:Array<HTMLInputElement> = [input2, input3];
             
-                sliderYear.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
+            state.sliderYear.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
                     inputs[String(handle)].value = Math.round(values[String(handle)]);
                     
                 state.sliderYearValue.min=Math.round(values[String(0)]);
@@ -89,7 +89,7 @@ export function createSliders(){
                 const setRangeSlider = (i:number, value:string) => {
                     let arr:Array<string> = [];
                     arr[i] = value;
-                    sliderYear.noUiSlider.set(arr);
+                    state.sliderYear.noUiSlider.set(arr);
                 };
             
                 inputs.forEach((el, index:number) => {
@@ -99,14 +99,16 @@ export function createSliders(){
                 });
             }
                 if(localStorage.getItem('sliderCount')){
-                    sliderCount.noUiSlider.set((<string>localStorage.getItem('sliderCount')).split(','));
+                    state.sliderCount.noUiSlider.set((<string>localStorage.getItem('sliderCount')).split(','));
                 }
                 if(localStorage.getItem('sliderYear')){
-                    sliderYear.noUiSlider.set((<string>localStorage.getItem('sliderYear')).split(','));
+                    state.sliderYear.noUiSlider.set((<string>localStorage.getItem('sliderYear')).split(','));
                 }
 }
 
 export function resetSliders(){
-  sliderCount.noUiSlider.set([0, 12]);
-  sliderYear.noUiSlider.set([1940, 2020]);
+  state.sliderCount.noUiSlider.set([0, 12]);
+  state.sliderYear.noUiSlider.set([1940, 2020]);
+  localStorage.removeItem('sliderCount');
+  localStorage.removeItem('sliderYear');
 }

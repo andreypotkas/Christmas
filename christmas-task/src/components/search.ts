@@ -1,9 +1,12 @@
-import { filt } from "..";
-import { arrToys, Itoys } from "./example";
-import { availableColors } from "./filter-by-color";
-import { availableForms } from "./filter-by-form";
-import { availableSizes } from "./filter-by-size";
 
-
-
-export const searchInput = document.getElementById('search-input') as HTMLInputElement;
+import { available, constant, filt } from "..";
+import { arrToys } from "./example";
+export function filterBySearch(){
+constant.clearSearch.addEventListener('click', ()=>{
+    constant.searchInput.value='';
+    filt(arrToys, available.forms, available.colors, available.sizes);
+  })
+  constant.searchInput.addEventListener('keydown', ()=>{
+    filt(arrToys, available.forms, available.colors, available.sizes);
+  });
+}

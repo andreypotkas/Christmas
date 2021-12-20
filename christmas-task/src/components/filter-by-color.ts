@@ -1,38 +1,38 @@
 
-import { filt, isFilters } from "..";
+import { available, filt, isFilters } from "..";
 import { arrToys } from "./example";
-import { availableForms} from "./filter-by-form";
-import { availableSizes } from "./filter-by-size";
+
 export let allColors:string[]=['белый', 'желтый', 'красный', 'синий', 'зелёный'];
-export let availableColors:string[] =[];
-if(localStorage.getItem('colors')){
-    availableColors=(<string>localStorage.getItem('colors')).split(',');
-    
-}
+
+
 const colorContainer = document.getElementById('toys-color-container') as HTMLElement;
 const toyColors:HTMLCollection = colorContainer.getElementsByTagName('button');
 
 export function filterByColor (){
     for (let i =0; i<toyColors.length; i++){
         if(localStorage.getItem('colors')){
-            if(availableColors.includes(allColors[i])){
+            available.colors=(<string>localStorage.getItem('colors')).split(',');
+            if((available.colors).includes(allColors[i])){
                 toyColors[i].classList.add('active-btn')
         }
     }
         toyColors[i].addEventListener('click', ()=>{
             isFilters.isFilterByColor = true;
             if(!toyColors[i].classList.contains('active-btn')){
-                availableColors.push(allColors[i]);
+                (available.colors).push(allColors[i]);
                 
             }else{
-                const index = availableColors.indexOf(allColors[i]);
+                const index = (available.colors).indexOf(allColors[i]);
                 if (index > -1) {
-                availableColors.splice(index, 1);
+                    (available.colors).splice(index, 1);
                 }   
                 }
                  toyColors[i].classList.toggle('active-btn');
-                 localStorage.setItem('colors', `${availableColors}`);
-                 filt (arrToys, availableForms, availableColors, availableSizes);
+                 localStorage.setItem('colors', `${available.colors}`);
+                 if((available.colors).length==0){
+                    isFilters.isFilterByColor=false;
+                }
+                 filt (arrToys, available.forms, available.colors, available.sizes);
         })
     }
     
@@ -40,11 +40,11 @@ export function filterByColor (){
 
 
   export function resetFilterByColor (){
-    isFilters.isFilterByColor = false;
-    availableColors=[];
     for (let i =0; i<toyColors.length; i++){
             if(toyColors[i].classList.contains('active-btn')){
                 toyColors[i].classList.remove('active-btn');
         }
     }
+    isFilters.isFilterByColor=false;
+    localStorage.removeItem('colors');
   };

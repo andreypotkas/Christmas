@@ -1,16 +1,8 @@
 
-import { filt, isFilters } from "..";
+import { available, filt, isFilters } from "..";
 import { arrToys } from "./example";
 
-import { availableColors } from "./filter-by-color";
-import { availableForms } from "./filter-by-form";
 
-
-
-export let availableSizes:string[] =[];
-if(localStorage.getItem('sizes')){
-    availableSizes=(<string>localStorage.getItem('sizes')).split(',');
-}
 const toySizeContainer = document.getElementById('toys-size') as HTMLElement;
 const toySizes: HTMLInputElement[] =[];
 
@@ -24,22 +16,26 @@ export let allSizes:string[]=['малый', 'средний', 'большой'];
 export function filterBySize (){
     for (let i =0; i<toySizes.length; i++){
         if(localStorage.getItem('sizes')){
-            if(availableSizes.includes(allSizes[i])){
+            available.sizes=(<string>localStorage.getItem('sizes')).split(',');
+            if(available.sizes.includes(allSizes[i])){
                 toySizes[i].checked=true;
         }
     }
         toySizes[i].addEventListener('change', ()=>{
            isFilters.isFilterBySise = true;
             if(toySizes[i].checked){
-                availableSizes.push(allSizes[i]);
+                available.sizes.push(allSizes[i]);
                 
             }else{
-                if (availableSizes.indexOf(allSizes[i]) > -1) {
-                availableSizes.splice(availableSizes.indexOf(allSizes[i]), 1);
+                if (available.sizes.indexOf(allSizes[i]) > -1) {
+                    available.sizes.splice(available.sizes.indexOf(allSizes[i]), 1);
                 }   
             }
-            localStorage.setItem('sizes', `${availableSizes}`);
-            filt (arrToys, availableForms, availableColors, availableSizes);
+            localStorage.setItem('sizes', `${available.sizes}`);
+            if(available.sizes.length==0){
+                isFilters.isFilterBySise=false;
+            }
+            filt (arrToys, available.forms, available.colors, available.sizes);
         })
     }
 }
@@ -51,5 +47,6 @@ export function resetFilterBySize (){
                 toySizes[i].checked=false;
             }
     }
-    availableSizes=[];
+    isFilters.isFilterBySise=false;
+    localStorage.removeItem('sizes')
 }

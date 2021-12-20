@@ -1,25 +1,20 @@
 import { arrToys } from "./example";
-import { Itoys } from "./example";
 import { container } from "./card";
-import { favoriteCheck, filt, resetSettings } from "..";
+import { available, constant, filt} from "..";
 import { showMessage } from "./message";
-import { availableForms } from "./filter-by-form";
-import { availableColors } from "./filter-by-color";
-import { availableSizes } from "./filter-by-size";
-export let favoriteToysCount = document.getElementById('favorite-toys-count') as HTMLElement;
 
-export let favoriteCount:number =0;
 
 export function addFavorite(){
 if (localStorage.getItem('favor')){
-  favoriteCount=Number(localStorage.getItem('favor'));
+  constant.favoriteCount=Number(localStorage.getItem('favor'));
 }
-favoriteToysCount.innerHTML=`${favoriteCount}`;
+constant.favoriteToysCount.innerHTML=`${constant.favoriteCount}`;
+
 container.onclick = function(event:Event):void {
     let target = event.target as HTMLElement; 
     if (target.classList.contains('toy-card-title') || target.classList.contains('toy-card-description') || target.classList.contains('toy-card-img')){
-      favoriteCount=Number(favoriteToysCount.textContent);  
-      clickCard(target, favoriteToysCount, favoriteCount);
+      constant.favoriteCount=Number(constant.favoriteToysCount.textContent);  
+      clickCard(target, constant.favoriteToysCount, constant.favoriteCount);
     };
   };
 
@@ -28,23 +23,24 @@ container.onclick = function(event:Event):void {
 export function clickCard(target:HTMLElement, favoriteToysCount:HTMLElement, favoriteCount:number):void{
     if(target.querySelector('.favorite-check')?.classList.contains('hide')){
       
-        if(favoriteCount>=20){
+        if(constant.favoriteCount>=20){
           showMessage('Извините, все слоты заполнены');
         }else{
-          favoriteCount++;
+          constant.favoriteCount++;
           
           target.querySelector('.favorite-check')?.classList.remove('hide');
         }
     }else if(target.querySelector('.favorite-check')?.classList.contains('favorite-check')){
         target.querySelector('.favorite-check')?.classList.add('hide');
-        favoriteCount--;
+        constant.favoriteCount--;
     }
-    localStorage.setItem('favor', `${favoriteCount}`)
-    favoriteToysCount.innerHTML=`${favoriteCount}`;
+    localStorage.setItem('favor', `${constant.favoriteCount}`)
+    constant.favoriteToysCount.innerHTML=`${constant.favoriteCount}`;
   }
 
-  resetSettings?.addEventListener('click',()=>{
-    favoriteCount=0;
-    favoriteToysCount.innerHTML=`${favoriteCount}`;
-    filt(arrToys, availableForms, availableColors, availableSizes);
-  })
+export function filterByFavorite(){
+    constant.favoriteCheck.addEventListener('change', ()=>{
+      localStorage.setItem('favorite', `${constant.favoriteCheck.checked}`);
+      filt (arrToys, available.forms, available.colors, available.sizes);
+    })
+  }
