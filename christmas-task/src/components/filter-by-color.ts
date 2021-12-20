@@ -41,6 +41,7 @@ export function filterByColor (){
 
   export function resetFilterByColor (){
     isFilters.isFilterByColor = false;
+    availableColors=[];
     for (let i =0; i<toyColors.length; i++){
             if(toyColors[i].classList.contains('active-btn')){
                 toyColors[i].classList.remove('active-btn');

@@ -10,20 +10,19 @@ import { availableColors } from "./filter-by-color";
 import { availableSizes } from "./filter-by-size";
   
 
+let sortList = document.getElementById('sort-list') as HTMLSelectElement;
 
-  export function sortByName (arr:Itoys[]){
+export function sortByName (arr:Itoys[]){
     arr.sort((a:Itoys,b:Itoys):number=>{
         let textA = a.toyName.toUpperCase();
         let textB = b.toyName.toUpperCase();
         return textA.localeCompare(textB);
     });
 }
-
 export function sortByCount (arr:Itoys[]){
     arr.sort((a:Itoys,b:Itoys):number=>Number(a.toyCount)-Number(b.toyCount));
 }
 
-let sortList = document.getElementById('sort-list') as HTMLSelectElement;
 export function sortByNameCount (arr:Itoys[]){
   if(localStorage.getItem('selectedIndex')){
     sortList.selectedIndex=Number(localStorage.getItem('selectedIndex'));

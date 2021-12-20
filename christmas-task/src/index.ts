@@ -9,6 +9,7 @@ import { allColors, availableColors, filterByColor, resetFilterByColor} from "./
 import {allForms, availableForms, filterByForm, resetFilterByForm} from './components/filter-by-form';
 import { filterBySize, availableSizes, allSizes, resetFilterBySize} from "./components/filter-by-size";
 import { searchInput} from "./components/search";
+import { showMessage } from "./components/message";
 
 document.getElementById('clear-search')?.addEventListener('click', ()=>{
   searchInput.value='';
@@ -29,14 +30,7 @@ export const isFilters={
   isFilterByColor:false,
   isFilterBySise:false,
 }
-const resetFiltres = document.getElementById('reset-filters');
-resetFiltres?.addEventListener('click', ()=>{
-  resetFilterBySize();
-  resetFilterByForm();
-  resetFilterByColor();
-  resetSliders();
-  filt (arrToys, availableForms, availableColors, availableSizes);
-});
+
 
 sortByNameCount(arrToys);
 filterBySize();
@@ -44,7 +38,9 @@ createSliders();
 addFavorite();
 filterByForm();
 filterByColor();
+
 let availableCheck = [true, false];
+
 export let favoriteCheck = document.getElementById('toys-favorite') as HTMLInputElement;
 if(localStorage.getItem('favorite')=='true'){
     favoriteCheck.checked=true;
@@ -84,6 +80,9 @@ export function filt (arr:Itoys[], form:string[], color:string[], size:string[])
       && availableCheck.includes(item.toyFavorite)
       && item.toyName.toLowerCase().includes(searchInput.value.toLowerCase())
     });
+    if(sortArr.length==0){
+      showMessage('Извините, совпадений не обнаружено');
+    }
       sortByNameCount(sortArr);
 container.innerHTML='';
 for (let i = 0; i<sortArr.length;i++){
@@ -92,12 +91,28 @@ for (let i = 0; i<sortArr.length;i++){
 }
 
 filt (arrToys, availableForms, availableColors, availableSizes);
+console.log(availableForms);
+console.log(availableColors);
+console.log(availableSizes);
 
 /* let sortArray = arr.filter(item=>['shape', 'color', 'size'].every((key)=>{
      if (filters[key].length === 0) return true;
      const keyToy = `toy${key}`
      return filters[key].includes(item[key])
     })) */
+
+// сброс фильтров
+    const resetFiltres = document.getElementById('reset-filters');
+    resetFiltres?.addEventListener('click', ()=>{
+      resetFilterBySize();
+      resetFilterByForm();
+      resetFilterByColor();
+      resetSliders();
+      favoriteCheck.checked=false;
+      filt (arrToys, availableForms, availableColors, availableSizes);
+    });
+
+// сброс настроек всех    
 export const resetSettings = document.getElementById('reset-settings');
 resetSettings?.addEventListener('click',()=>{
   localStorage.clear();
@@ -108,6 +123,8 @@ resetSettings?.addEventListener('click',()=>{
   favoriteCheck.checked=false;
   filt (arrToys, availableForms, availableColors, availableSizes);
 })
+
+  
 searchInput.addEventListener('keydown', ()=>{
   filt(arrToys, availableForms, availableColors, availableSizes);
 });

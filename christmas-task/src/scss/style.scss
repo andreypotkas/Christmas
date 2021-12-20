@@ -50,7 +50,14 @@ header{
   display: flex;
 }
 
-    
+h3::after{
+  content: '';
+  display: block;
+  width: 300px;
+  height: 3px;
+  background: white;
+  
+}
 footer{
   
   display: flex;

@@ -23,7 +23,7 @@ sliderCount.addEventListener('click', ()=>{
     });
 
 
-  /*    */
+
 const sliderYear = document.getElementById('slider-year')as TargetElement;
 sliderYear.addEventListener('click', ()=>{
     filt (arrToys, availableForms, availableColors, availableSizes);
@@ -46,11 +46,9 @@ export function createSliders(){
         const inputs:Array<HTMLInputElement> = [input0, input1];
         
             sliderCount.noUiSlider.on('update', function(values:(string|number)[], handle:number):void{
-                 /* isFilters.isFilterByCount = true; */
                 inputs[String(handle)].value = Math.round(values[String(handle)]);
                 state.sliderCountValue.min=Math.round(values[String(0)]);
                 state.sliderCountValue.max=Math.round(values[String(1)]);
-                /*  */
             });
         
             const setRangeSlider = (i:number, value:string) => {
@@ -111,5 +109,4 @@ export function createSliders(){
 export function resetSliders(){
   sliderCount.noUiSlider.set([0, 12]);
   sliderYear.noUiSlider.set([1940, 2020]);
- 
 }

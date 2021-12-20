@@ -9,7 +9,6 @@ import {filt, isFilters} from '../index';
 export let availableForms:string[] =[];
 if(localStorage.getItem('forms')){
     availableForms=(<string>localStorage.getItem('forms')).split(',');
-    
 }
 
 const toyFormContainer = document.getElementById('toys-form-container') as HTMLElement;
@@ -43,6 +42,7 @@ export function resetFilterByForm (){
             }
       }
       isFilters.isFilterByForm=false;
+      availableForms=[];
     }
 /* function filterForm(arr:Itoys[], form:string[]):Itoys[]{
     let filtredArr:Itoys[] = arr.filter(item=>{return form.indexOf(item.toyShape)!=-1});

@@ -46,10 +46,10 @@ export function filterBySize (){
 
 export function resetFilterBySize (){
     for (let i =0; i<toySizes.length; i++){
-        
            isFilters.isFilterBySise = false;
             if(toySizes[i].checked){
                 toySizes[i].checked=false;
             }
     }
+    availableSizes=[];
 }
