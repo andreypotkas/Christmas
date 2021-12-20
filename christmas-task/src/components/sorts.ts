@@ -4,7 +4,7 @@ import {Itoys} from './example'
 import { arrToys } from "./example";
 import { container } from "./card";
 import { createToyCard } from "./card";
-import { filt, myStorage } from "..";
+import { filt, myStorage, resetSettings } from "..";
 import { availableForms } from "./filter-by-form";
 import { availableColors } from "./filter-by-color";
 import { availableSizes } from "./filter-by-size";

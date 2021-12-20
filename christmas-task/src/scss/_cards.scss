@@ -1,14 +1,26 @@
 .toys-container-cards{
     display: flex;
+    row-gap: 10px;
+    column-gap: 10px;
     flex-wrap: wrap;
     width: 70%;
+    margin-left: 10px;
     .toy-card{
+        padding-left: 10px;
+        color: white;
+        background: rgba(34, 219, 126, 0.466);
         display: flex;
         flex-direction: column;
         width: 200px;
         height: 300px;
-        border: white 2px solid; 
+        border: rgba(255, 255, 255, 0) 2px solid; 
         border-radius: 20px;
+        &:hover{
+            border: white 2px solid;
+        }
+        .toy-card-title{
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
         .toy-card-description{
             p{
                 margin: 5px;

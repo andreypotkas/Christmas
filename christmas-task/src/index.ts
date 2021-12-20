@@ -98,7 +98,7 @@ filt (arrToys, availableForms, availableColors, availableSizes);
      const keyToy = `toy${key}`
      return filters[key].includes(item[key])
     })) */
-const resetSettings = document.getElementById('reset-settings');
+export const resetSettings = document.getElementById('reset-settings');
 resetSettings?.addEventListener('click',()=>{
   localStorage.clear();
   resetFilterBySize();
