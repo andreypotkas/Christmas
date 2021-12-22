@@ -15,7 +15,7 @@ export function createToyCard(data:Array<Itoys>, num:number){
   favoriteCheckImg.src='../assets/1f499.png';
   favoriteCheckImg.classList.add('favorite-check');
   favoriteCheckImg.classList.add('hide');
-  toyCardImg.style.background=`${data[num].toyImg}`;
+  toyCardImg.style.background=`url('${data[num].toyImg}')`;
   toyCardImg.style.backgroundRepeat=`no-repeat`;
   toyCardImg.style.backgroundSize='contain';
   toyCardTitle.innerHTML=`${data[num].toyName}`;
@@ -57,7 +57,7 @@ export function createToyCard(data:Array<Itoys>, num:number){
     
 }
 
-function createEl (tagName:string, classAdd:string):HTMLElement{
+export function createEl (tagName:string, classAdd:string):HTMLElement{
   const el = document.createElement(tagName);
   el.classList.add(classAdd);
   return el;

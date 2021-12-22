@@ -37,6 +37,6 @@ export class toys{
 export let arrToys:Array<Itoys>=[];
 
 for (let i = 0; i<data.length; i++ ){
-  let example:Itoys = new toys(`url('../assets/toys/${i+1}.webp')`, data[i].name, data[i].count, data[i].year, data[i].shape, data[i].color, data[i].size, data[i].favorite);
+  let example:Itoys = new toys(`../assets/toys/${i+1}.webp`, data[i].name, data[i].count, data[i].year, data[i].shape, data[i].color, data[i].size, data[i].favorite);
   arrToys.push(example);
 } 

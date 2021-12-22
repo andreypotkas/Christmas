@@ -31,6 +31,11 @@ export const constant ={
   startPage: document.getElementById('start') as HTMLElement,
   toyPage: document.getElementById('toys') as HTMLElement,
   treePage: document.getElementById('tree') as HTMLElement,
+  treeToysContainer:document.getElementById('tree-toys-toys') as HTMLElement,
+}
+
+if(localStorage.getItem('chosenToys')){
+  constant.chosenToys=(<string>localStorage.getItem('chosenToys')).split(',');
 }
 
 export const isFilters:{
