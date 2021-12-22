@@ -49,4 +49,5 @@ export function resetFilterBySize (){
     }
     isFilters.isFilterBySise=false;
     localStorage.removeItem('sizes')
+    available.sizes=[];
 }

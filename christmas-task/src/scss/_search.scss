@@ -11,8 +11,9 @@
   width: 60px;
 }
 .search {
+  display: flex;
   position: relative;
-  
+  align-items: center;
   align-self: center;
     width: auto;
     float: right;

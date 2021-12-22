@@ -1,0 +1,45 @@
+#tree{
+    color: white;
+    display: flex;
+    column-gap: 5px;
+    height: 90vh;
+    box-sizing: border-box;
+    #tree-settings-volume-snow{
+            height: 10%;
+            box-sizing: border-box;
+            border: 1px white solid;
+    }
+    #tree-settings{
+        flex: 0 1 33.333%;
+        border: 1px white solid;
+        #tree-settings-select{
+            height: 35%;
+            box-sizing: border-box;
+            border: 1px white solid;
+        }
+        #tree-settings-bg{
+            height: 35%;
+            box-sizing: border-box;
+            border: 1px white solid;
+        }
+        #tree-settings-light{
+            box-sizing: border-box;
+            border: 1px white solid;
+            height: 20%;
+        }
+    }
+    #tree-tree{
+        flex: 0 1 33.333%;
+        border: 1px white solid;
+
+    }
+    #tree-toys{
+        flex: 0 1 33.333%;
+        border: 1px white solid;
+        #tree-toys-toys{
+            box-sizing: border-box;
+            height: 80%;
+            border: 1px white solid;
+        }
+    }
+}

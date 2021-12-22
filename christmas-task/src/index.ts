@@ -10,6 +10,7 @@ import {allForms, filterByForm, resetFilterByForm} from './components/filter-by-
 import { filterBySize, allSizes, resetFilterBySize} from "./components/filter-by-size";
 import { showMessage } from "./components/message";
 import { filterBySearch } from "./components/search";
+import { addButtonsOnPage } from "./components/start-page";
 
 export let myStorage = window.localStorage;
 
@@ -22,6 +23,14 @@ export const constant ={
   favoriteCount: 0,
   favoriteToysCount: document.getElementById('favorite-toys-count') as HTMLElement,
   sortList: document.getElementById('sort-list') as HTMLSelectElement,
+  chosenToys:[] as string[],
+  //
+  startPageBtn: document.getElementById('start-page-btn') as HTMLButtonElement,
+  toyPageBtn: document.getElementById('toys-page-btn') as HTMLButtonElement,
+  treePageBtn: document.getElementById('tree-page-btn') as HTMLButtonElement,
+  startPage: document.getElementById('start') as HTMLElement,
+  toyPage: document.getElementById('toys') as HTMLElement,
+  treePage: document.getElementById('tree') as HTMLElement,
 }
 
 export const isFilters:{
@@ -44,7 +53,7 @@ export const available:{
   sizes:[],
   check:[true, false]
 }
-
+addButtonsOnPage();
 filterByFavorite();
 filterBySearch();
 filterBySize();
@@ -55,6 +64,7 @@ filterByColor();
 sortByNameCount();
 
 export function filt (arr:Itoys[], form:string[], color:string[], size:string[]){
+  
   if(constant.favoriteCheck.checked || localStorage.getItem('favorite')=='true'){
     available.check=[true];
     constant.favoriteCheck.checked=true;

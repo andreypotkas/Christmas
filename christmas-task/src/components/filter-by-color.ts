@@ -47,4 +47,5 @@ export function filterByColor (){
     }
     isFilters.isFilterByColor=false;
     localStorage.removeItem('colors');
+    available.colors=[];
   };

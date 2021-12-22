@@ -45,4 +45,5 @@ export function resetFilterByForm (){
       }
       isFilters.isFilterByForm=false;
       localStorage.removeItem('forms');
+      available.forms=[];
     }
