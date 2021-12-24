@@ -3,7 +3,7 @@ import { createToyCard } from "./components/card";
 import { arrToys, Itoys } from "./components/example";
 import {createSliders, resetSliders, state} from "./components/sliders";
 import { container } from "./components/card"
-import { addFavorite, filterByFavorite} from "./components/favorite";
+import { addFavorite, filterByFavorite} from "./components/chosen";
 import {sortByNameCount} from './components/sorts'
 import { allColors, filterByColor, resetFilterByColor} from "./components/filter-by-color";
 import {allForms, filterByForm, resetFilterByForm} from './components/filter-by-form';
@@ -11,6 +11,8 @@ import { filterBySize, allSizes, resetFilterBySize} from "./components/filter-by
 import { showMessage } from "./components/message";
 import { filterBySearch } from "./components/search";
 import { addButtonsOnPage } from "./components/start-page";
+import { tree } from "./components/tree/class-tree";
+
 
 export let myStorage = window.localStorage;
 
@@ -32,6 +34,9 @@ export const constant ={
   toyPage: document.getElementById('toys') as HTMLElement,
   treePage: document.getElementById('tree') as HTMLElement,
   treeToysContainer:document.getElementById('tree-toys-toys') as HTMLElement,
+  selectTreeContainer: document.getElementById('tree-settings-select-tree') as HTMLElement,
+  selectBgContainer: document.getElementById('tree-settings-bg') as HTMLElement,
+  
 }
 
 if(localStorage.getItem('chosenToys')){
@@ -67,6 +72,8 @@ addFavorite();
 filterByForm();
 filterByColor();
 sortByNameCount();
+tree.addTypeTrees();
+tree.addTypeBg();
 
 export function filt (arr:Itoys[], form:string[], color:string[], size:string[]){
   
