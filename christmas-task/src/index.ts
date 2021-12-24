@@ -151,7 +151,7 @@ function createCardsOnPage(arr:Itoys[]):void{
 
 
 
-
+tree.snowAndVolume();
 
 /* let sortArray = arr.filter(item=>['shape', 'color', 'size'].every((key)=>{
      if (filters[key].length === 0) return true;

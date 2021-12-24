@@ -1,3 +1,5 @@
+
+
 #tree{
     color: white;
     display: flex;
@@ -8,9 +10,24 @@
     background: contain;
     background-repeat: no-repeat;
     #tree-settings-volume-snow{
+        display: flex;
             height: 10%;
             box-sizing: border-box;
             border: 1px white solid;
+            .snow-btn{
+                background: url('../assets/forms/snowflake.svg') no-repeat;
+                background-size: contain;
+                width: 50px;
+                height: 50px;
+            }
+            .volume-btn{
+                background: url('../assets/noun_Speaker_248990\ 1.svg') no-repeat;
+                background-size: contain;
+                width: 50px;
+                height: 50px;
+            }
+           
+            
     }
     #tree-settings{
         p{
@@ -57,6 +74,7 @@
         }
     }
     #tree-tree{
+        position: relative;
         flex: 0 1 33.333%;
         border: 1px white solid;
         .tree-main-img{
