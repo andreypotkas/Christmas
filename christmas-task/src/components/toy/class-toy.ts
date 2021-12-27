@@ -81,6 +81,7 @@ class Toys {
         constant.favoriteCount=0;
         constant.favoriteToysCount.innerHTML='0';
         toys.filt(arrToys, toys.available.forms, toys.available.colors, toys.available.sizes);
+       
     }  
 
     resetFilters(){
@@ -90,6 +91,7 @@ class Toys {
         resetSliders();
         constant.favoriteCheck.checked=false;
         this.filt(arrToys, this.available.forms, this.available.colors, this.available.sizes);
+        
     }
 
     filt (arr:Itoys[], form:string[], color:string[], size:string[]):void{
@@ -133,6 +135,7 @@ class Toys {
     }
 
     addChosen(){
+        
         if (localStorage.getItem('favor')){
           constant.favoriteCount=Number(localStorage.getItem('favor'));
         }
@@ -332,11 +335,21 @@ class Toys {
         this.isFilters.isFilterBySise=false;
         localStorage.removeItem('sizes')
         this.available.sizes=[];
+        
     }
 
     sortByNameCount (){
         sort.sort();
       }
+
+    initEvents(){
+      constant.resetFiltres.addEventListener('click', ()=>{
+        this.resetFilters();
+      });
+      constant.resetSettings.addEventListener('click',()=>{
+      this.resetSettings();
+      });
+    }
 };
 
 export let toys = new Toys();

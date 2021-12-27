@@ -204,7 +204,7 @@ class Tree{
         append.append(imgToy);
       }
     
-      chnageColorLight(color:string){
+    chnageColorLight(color:string){
         (<HTMLElement>document.getElementById('lightrope')).className='lightrope';
         (<HTMLElement>document.getElementById('lightrope')).classList.add(`${color}`);
         (<HTMLElement>document.getElementById('lightrope2')).className='lightrope lightrope2';

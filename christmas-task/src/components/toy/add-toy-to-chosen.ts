@@ -7,6 +7,9 @@ import { showMessage } from "./show-message";
 
 
 export function addToytoChosen(target:HTMLElement, favoriteToysCount:HTMLElement, favoriteCount:number):void{
+  if(localStorage.getItem('chosenToys')){
+    constant.chosenToys=(<string>localStorage.getItem('chosenToys')).split(',');
+  }
   //если не выбрана - добавить
     if(target.querySelector('.favorite-check')?.classList.contains('hide')){
         if(constant.favoriteCount>=20){

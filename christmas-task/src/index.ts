@@ -1,7 +1,7 @@
 import "./scss/style.scss";
 
 import { arrToys } from "./components/toy/create-arr-toys";
-import {createSliders, resetSliders, state} from "./components/toy/slider/sliders";
+import {createSliders} from "./components/toy/slider/sliders";
 import { addButtonsOnPage } from "./components/start-page/start-page";
 import { tree } from "./components/tree/class-tree";
 import { toys } from "./components/toy/class-toy";
@@ -27,14 +27,9 @@ export const constant ={
   treeToysContainer:document.getElementById('tree-toys-toys') as HTMLElement,
   selectTreeContainer: document.getElementById('tree-settings-select-tree') as HTMLElement,
   selectBgContainer: document.getElementById('tree-settings-bg') as HTMLElement,
-
 }
-
-if(localStorage.getItem('chosenToys')){
-  constant.chosenToys=(<string>localStorage.getItem('chosenToys')).split(',');
-}
-
 addButtonsOnPage();
+createSliders();
 tree.createLightropeBtn();
 tree.addTypeTrees();
 tree.addTypeBg();
@@ -46,19 +41,18 @@ toys.filterByColor();
 toys.filterByForm();
 toys.filterBySize();
 toys.sortByNameCount(); 
-createSliders();
-
-
+toys.initEvents();
 toys.filt(arrToys, toys.available.forms, toys.available.colors, toys.available.sizes); 
 
-constant.resetFiltres.addEventListener('click', ()=>{
-    toys.resetFilters();
-});
+console.log(
+  `
+  Здравствуйте! С Наступающим Вас Новым Годом! Желаю Вам в новом году удачи, успехов в учебе и стать Front-End Developer !))
+  Выполнены все требования кроме:
+  выбранные настройки сохраняются в local storage и отображаются при перезагрузке страницы. Если музыка сохранилась включённой, она начинает играть при первом клике. Есть кнопка сброса настроек, которая очищает local storage +10
+  когда игрушку "вешают на ёлку" количество игрушек в слоте уменьшается, когда игрушку "снимают с ёлки", количество игрушек в слоте увеличивается, когда все экземпляры игрушки помещаются на ёлку, отображается пустой слот +10
 
-constant.resetSettings.addEventListener('click',()=>{
-  toys.resetSettings();
-})
- 
-
+  Итого: 200 -20 = 180 
+`
+);
 
 
