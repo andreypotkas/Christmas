@@ -1,15 +1,10 @@
 import 'nouislider/dist/nouislider.css';
 import * as noUiSlider from 'nouislider';
 import { TargetElement } from "./nouislider";
-import { Itoys } from './example';
-import { arrToys } from './example';
-import { filt} from '..';
+import { Itoys } from '../create-arr-toys';
+import { arrToys } from '../create-arr-toys';
 
-import {available} from '../index'
-
-
-
-
+import { toys } from '../class-toy';
 export const state = {
     sliderCountValue: {min:0, max:12},
     sliderYearValue: {min:1940, max:2020},
@@ -18,15 +13,11 @@ export const state = {
   }
 
 state.sliderCount.addEventListener('click', ()=>{
-    filt (arrToys, available.forms, available.colors, available.sizes);
+    toys.filt(arrToys, toys.available.forms, toys.available.colors, toys.available.sizes);
     localStorage.setItem('sliderCount', `${state.sliderCount.noUiSlider.get()}`);
     });
-
-
-
-
 state.sliderYear.addEventListener('click', ()=>{
-    filt (arrToys, available.forms, available.colors, available.sizes);
+    toys.filt(arrToys, toys.available.forms, toys.available.colors, toys.available.sizes);
     localStorage.setItem('sliderYear', `${state.sliderYear.noUiSlider.get()}`);
 })
 let filtredArr:Itoys[];

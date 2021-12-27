@@ -1,21 +1,12 @@
 import "./scss/style.scss";
-import { createToyCard } from "./components/card";
-import { arrToys, Itoys } from "./components/example";
-import {createSliders, resetSliders, state} from "./components/sliders";
-import { container } from "./components/card"
-import { addFavorite, filterByFavorite} from "./components/chosen";
-import {sortByNameCount} from './components/sorts'
-import { allColors, filterByColor, resetFilterByColor} from "./components/filter-by-color";
-import {allForms, filterByForm, resetFilterByForm} from './components/filter-by-form';
-import { filterBySize, allSizes, resetFilterBySize} from "./components/filter-by-size";
-import { showMessage } from "./components/message";
-import { filterBySearch } from "./components/search";
-import { addButtonsOnPage } from "./components/start-page";
-import { tree } from "./components/tree/class-tree";
 
+import { arrToys } from "./components/toy/create-arr-toys";
+import {createSliders, resetSliders, state} from "./components/toy/slider/sliders";
+import { addButtonsOnPage } from "./components/start-page/start-page";
+import { tree } from "./components/tree/class-tree";
+import { toys } from "./components/toy/class-toy";
 
 export let myStorage = window.localStorage;
-
 export const constant ={
   searchInput: document.getElementById('search-input') as HTMLInputElement,
   clearSearch: document.getElementById('clear-search') as HTMLElement,
@@ -24,9 +15,9 @@ export const constant ={
   resetSettings: document.getElementById('reset-settings') as HTMLElement,
   favoriteCount: 0,
   favoriteToysCount: document.getElementById('favorite-toys-count') as HTMLElement,
-  sortList: document.getElementById('sort-list') as HTMLSelectElement,
   chosenToys:[] as string[],
   //
+  playBtn: document.getElementById('start-play') as HTMLButtonElement,
   startPageBtn: document.getElementById('start-page-btn') as HTMLButtonElement,
   toyPageBtn: document.getElementById('toys-page-btn') as HTMLButtonElement,
   treePageBtn: document.getElementById('tree-page-btn') as HTMLButtonElement,
@@ -36,125 +27,38 @@ export const constant ={
   treeToysContainer:document.getElementById('tree-toys-toys') as HTMLElement,
   selectTreeContainer: document.getElementById('tree-settings-select-tree') as HTMLElement,
   selectBgContainer: document.getElementById('tree-settings-bg') as HTMLElement,
-  
+
 }
 
 if(localStorage.getItem('chosenToys')){
   constant.chosenToys=(<string>localStorage.getItem('chosenToys')).split(',');
 }
 
-export const isFilters:{
-  isFilterByForm:boolean;
-  isFilterByColor:boolean;
-  isFilterBySise:boolean;
-}={
-  isFilterByForm:false,
-  isFilterByColor:false,
-  isFilterBySise:false,
-}
-export const available:{
-  colors:string[];
-  forms:string[];
-  sizes:string[];
-  check:boolean[]
-}={
-  colors:[],
-  forms:[],
-  sizes:[],
-  check:[true, false]
-}
 addButtonsOnPage();
-filterByFavorite();
-filterBySearch();
-filterBySize();
-createSliders();
-addFavorite();
-filterByForm();
-filterByColor();
-sortByNameCount();
+tree.createLightropeBtn();
 tree.addTypeTrees();
 tree.addTypeBg();
-
-export function filt (arr:Itoys[], form:string[], color:string[], size:string[]){
-  
-  if(constant.favoriteCheck.checked || localStorage.getItem('favorite')=='true'){
-    available.check=[true];
-    constant.favoriteCheck.checked=true;
-  }else if(!constant.favoriteCheck.checked){
-    available.check=[true, false];
-  }
-  if(isFilters.isFilterByForm == false && !localStorage.getItem('forms')){
-    form=allForms;
-  }
-  if(isFilters.isFilterByColor == false && !localStorage.getItem('colors')){
-    color=allColors;
-  }
-  if(isFilters.isFilterBySise == false && !localStorage.getItem('sizes')){
-    size=allSizes;
-  }
-  let sortArr = arr.filter(item=>{
-      return form.includes(item.toyShape)
-      && color.includes(item.toyColor)
-      && size.includes(item.toySize)
-      && Number(item.toyCount)>=state.sliderCountValue.min 
-      && Number(item.toyCount)<=state.sliderCountValue.max 
-      && Number(item.toyYear)>=state.sliderYearValue.min 
-      && Number(item.toyYear)<=state.sliderYearValue.max
-      && available.check.includes(item.toyFavorite)
-      && item.toyName.toLowerCase().includes(constant.searchInput.value.toLowerCase())
-    });
-    if(sortArr.length==0){
-      showMessage('Извините, совпадений не обнаружено');
-    }
-    createCardsOnPage(sortArr);
-}
-
-
-filt (arrToys, available.forms, available.colors, available.sizes);
-
-
-
-// сброс фильтров
-   
-   constant.resetFiltres.addEventListener('click', ()=>{
-      resetFilterBySize();
-      resetFilterByForm();
-      resetFilterByColor();
-      resetSliders();
-      constant.favoriteCheck.checked=false;
-      filt (arrToys, available.forms, available.colors, available.sizes);
-    });
-
-// сброс настроек всех    
-
-  constant.resetSettings.addEventListener('click',()=>{
-  constant.sortList.selectedIndex=0;
-  localStorage.clear();
-  resetFilterBySize();
-  resetFilterByForm();
-  resetFilterByColor();
-  resetSliders();
-  constant.favoriteCheck.checked=false;
-  constant.favoriteCount=0;
-  constant.favoriteToysCount.innerHTML='0';
-  filt (arrToys, available.forms, available.colors, available.sizes);
-})
-
-function createCardsOnPage(arr:Itoys[]):void{
-  container.innerHTML='';
-  for (let i = 0; i<arr.length;i++){
-    createToyCard(arr, i);
-  }
-}
-
-
-
-
-
 tree.snowAndVolume();
+toys.filterByFavorite();
+toys.filterBySearch();
+toys.addChosen();
+toys.filterByColor();
+toys.filterByForm();
+toys.filterBySize();
+toys.sortByNameCount(); 
+createSliders();
 
-/* let sortArray = arr.filter(item=>['shape', 'color', 'size'].every((key)=>{
-     if (filters[key].length === 0) return true;
-     const keyToy = `toy${key}`
-     return filters[key].includes(item[key])
-    })) */
+
+toys.filt(arrToys, toys.available.forms, toys.available.colors, toys.available.sizes); 
+
+constant.resetFiltres.addEventListener('click', ()=>{
+    toys.resetFilters();
+});
+
+constant.resetSettings.addEventListener('click',()=>{
+  toys.resetSettings();
+})
+ 
+
+
+

@@ -1,5 +1,4 @@
 import { constant } from "../../index";
-import { createEl } from "../card";
 import { handleDragEnterLeave, handleOverDrop, handleDragStart } from "./drag&drop";
 let isSnow= false;
 class Tree{
@@ -9,7 +8,6 @@ class Tree{
     constructor(
         treeArea:string=area,
         mainTreeContainer=(document.getElementById('tree-tree')) as HTMLElement,
-        
     )
     {
         this.treeArea=treeArea;
@@ -17,21 +15,78 @@ class Tree{
         
     }
 
+    createLigthrope(){ 
+        let ligthrope = this.createEl('ul', 'lightrope');
+        let ligthrope2 = this.createEl('ul', 'lightrope');
+        let ligthrope3 = this.createEl('ul', 'lightrope');
+        ligthrope.id='lightrope';
+        ligthrope2.id='lightrope2';
+        ligthrope3.id='lightrope3';
+        ligthrope2.classList.add('lightrope2');
+        ligthrope3.classList.add('lightrope3');
+        (<HTMLElement>document.getElementById('tree-snow')).append(ligthrope);
+        (<HTMLElement>document.getElementById('tree-snow')).append(ligthrope2);
+        (<HTMLElement>document.getElementById('tree-snow')).append(ligthrope3);
+        for (let i = 0; i<9; i++){
+            let ligth = this.createEl('li', 'ligth');
+            let ligth2 = this.createEl('li', 'ligth');
+            let ligth3 = this.createEl('li', 'ligth');
+            ligthrope.append(ligth);
+            ligthrope2.append(ligth2);
+            ligthrope3.append(ligth3);
+        }
+    }
+
+    createLightropeBtn(){
+        let isLightrope=false;
+        let lightropeBtn =  document.getElementById('lightrope-btn') as HTMLInputElement;
+        let lightropeBtnRed = this.createEl('button', 'lightrope-btn-red');
+        let lightropeBtnYellow = this.createEl('button', 'lightrope-btn-yellow');
+        let lightropeBtnBlue = this.createEl('button', 'lightrope-btn-blue');
+        let lightropeBtnWhite = this.createEl('button', 'lightrope-btn-white');
+        let lightropeBtnAll = this.createEl('button', 'lightrope-btn-all');
+        document.getElementById('lightrope-colors')?.append(lightropeBtnBlue, lightropeBtnRed, lightropeBtnYellow, lightropeBtnWhite, lightropeBtnAll);
+        lightropeBtn.addEventListener('change',()=>{
+            if(lightropeBtn.checked==true){
+                this.createLigthrope();
+                lightropeBtn.classList.toggle('active-btn');
+                (<HTMLElement>document.getElementById('lightrope-colors')).style.display='flex';
+            }else{
+                document.getElementById('lightrope')?.parentNode?.removeChild(<HTMLElement>document.getElementById('lightrope'));
+                document.getElementById('lightrope2')?.parentNode?.removeChild(<HTMLElement>document.getElementById('lightrope2'));
+                document.getElementById('lightrope3')?.parentNode?.removeChild(<HTMLElement>document.getElementById('lightrope3'));
+                lightropeBtn.classList.toggle('active-btn');
+                (<HTMLElement>document.getElementById('lightrope-colors')).style.display='none';
+            }
+        })
+        lightropeBtnBlue.addEventListener('click',()=>{
+            this.chnageColorLight('blue-light');
+        });
+        lightropeBtnRed.addEventListener('click',()=>{
+            this.chnageColorLight('red-light');
+        });
+        lightropeBtnWhite.addEventListener('click',()=>{
+            this.chnageColorLight('yellow-light');
+        });
+        lightropeBtnYellow.addEventListener('click',()=>{
+            this.chnageColorLight('white-light');
+        });
+        lightropeBtnAll.addEventListener('click',()=>{
+            this.chnageColorLight('all');
+        });
+       
+    }
+
     createSnowFlake() {
         const snow_flake = document.createElement('i');
         snow_flake.classList.add('fas');
         snow_flake.classList.add('fa-snowflake');
         let snowWidth=(<HTMLElement>document.getElementById('tree-tree')).offsetWidth;
-        snow_flake.style.left = Math.random() * Number(snowWidth) + 'px';
-        console.log(Number(snowWidth));
+        snow_flake.style.left = Math.random() * snowWidth + 'px';
         snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's'; // between 2 - 5 seconds
         snow_flake.style.opacity = String(Math.random());
         snow_flake.style.fontSize = Math.random() * 10 + 10 + 'px';
-        
-        document.getElementById('tree-tree')?.append(snow_flake);
-            
-        
-        
+        (<HTMLElement>document.getElementById('tree-snow')).append(snow_flake);
         setTimeout(() => {
             snow_flake.remove();
         }, 5000)
@@ -40,8 +95,8 @@ class Tree{
 
     snowAndVolume(){
         let song= document.getElementById('song') as HTMLAudioElement ;
-        let snowBtn:HTMLElement=createEl('button', 'snow-btn');
-        let volumeBtn:HTMLElement=createEl('button', 'volume-btn');
+        let snowBtn=this.createEl('button', 'snow-btn');
+        let volumeBtn:HTMLElement=this.createEl('button', 'volume-btn');
         document.getElementById('tree-settings-snow')?.append(snowBtn);
         document.getElementById('tree-settings-volume')?.append(volumeBtn);
         volumeBtn.addEventListener('click', ()=>{
@@ -62,16 +117,26 @@ class Tree{
         })
     }
 
-    addTreeArea(i:number=1):void{
+    createEl(tagName:string, classAdd:string):HTMLElement{
+        const el:HTMLElement = document.createElement(tagName);
+        el.classList.add(classAdd);
+        return el;
+      } 
+
+    addTreeArea(i:number=1){
         if(this.mainTreeContainer!=null){
             this.mainTreeContainer.innerHTML=`
             <img src="../assets/tree/${1+i}.webp" usemap="#image-map">
-            ${this.treeArea}`;
+            ${this.treeArea}
+            <section class="tree-snow" id="tree-snow"></section>
+            <section class="tree-lightrope" id="tree-snow"></section>
+            `;
+
             this.addEventsOnTreeArea();
         }
     }
 
-    addEventsOnTreeArea ():void{
+    addEventsOnTreeArea (){
         (<HTMLElement>document.getElementById('area')).addEventListener("dragover", handleOverDrop);
         (<HTMLElement>document.getElementById('area')).addEventListener("drop", handleOverDrop);
         (<HTMLElement>document.getElementById('area')).addEventListener("dragenter", handleDragEnterLeave);
@@ -80,8 +145,8 @@ class Tree{
 
     addTypeTrees(){
         for (let i = 0; i < 6; i++){
-            let treeType = createEl('div', 'type-of-tree');
-            let treeTypeImg = new Image(80, 80);
+            let treeType = this.createEl('div', 'type-of-tree');
+            let treeTypeImg = new Image(70, 70);
             treeTypeImg.src=`../assets/tree/${i+1}.webp`
             constant.selectTreeContainer.append(treeType);
             treeType.append(treeTypeImg);
@@ -90,20 +155,20 @@ class Tree{
             }
           }
           tree.addTreeArea();
-    }
+    } 
         
     addTypeBg(){
         if(this.mainTreeContainer!=null){
             this.mainTreeContainer.style.background=`url('../assets/bg/1.webp')`;
             this.mainTreeContainer.style.backgroundSize='cover';
             for (let i = 0; i < 8; i++){
-                let bgType = createEl('div', 'type-of-bg');
-                let bgImg = new Image(50, 50);
+                let bgType = this.createEl('div', 'type-of-bg');
+                let bgImg = new Image(100, 100);
                 bgImg.src=`../assets/bg/${i+1}.webp`;
                 constant.selectBgContainer.append(bgType);
                 bgType.append(bgImg);
                 bgType.addEventListener('click', ()=>{
-                    this.changeBg(i)
+                    this.changeBg(i);
                 })
        }
                 
@@ -118,12 +183,12 @@ class Tree{
     }
 
     createChosenToysOnTreePage (img:string, count:string){
-        let treeToy = createEl('div', 'tree-toy');
+        let treeToy = this.createEl('div', 'tree-toy');
         constant.treeToysContainer.append(treeToy);
         for (let i =0; i<Number(count); i++){
          tree.createChosenToy(img, i, treeToy);
         }
-        let treeToyCount = createEl('p', 'tree-toy-count');
+        let treeToyCount = this.createEl('p', 'tree-toy-count');
         treeToy.append(treeToyCount);
         treeToyCount.textContent=`${count}`;
     }
@@ -138,6 +203,17 @@ class Tree{
         imgToy.addEventListener("dragstart", handleDragStart);
         append.append(imgToy);
       }
+    
+      chnageColorLight(color:string){
+        (<HTMLElement>document.getElementById('lightrope')).className='lightrope';
+        (<HTMLElement>document.getElementById('lightrope')).classList.add(`${color}`);
+        (<HTMLElement>document.getElementById('lightrope2')).className='lightrope lightrope2';
+        (<HTMLElement>document.getElementById('lightrope2')).classList.add(`${color}`);
+        (<HTMLElement>document.getElementById('lightrope3')).className='lightrope lightrope3';
+        (<HTMLElement>document.getElementById('lightrope3')).classList.add(`${color}`);
+    }
+    
+    
 }
 
 let area = `
@@ -146,7 +222,6 @@ let area = `
 </map> `
 
 export let tree = new Tree();
-
 
 
 

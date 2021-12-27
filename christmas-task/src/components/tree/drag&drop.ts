@@ -27,20 +27,21 @@ export function handleOverDrop(e) {
 
     if (draggedEl.parentNode == e.target) {
         e.target.className = "";
+        moveAt(e.pageX, e.pageY);
         return; 
         
     }
     
     e.target.position='relative';
-     
     (<HTMLElement>draggedEl.parentNode).removeChild(draggedEl);
     e.target.appendChild(draggedEl); 
-    function moveAt(pageX:number, pageY:number) {
+     moveAt(e.pageX, e.pageY);
+     
+     function moveAt(pageX:number, pageY:number) {
         draggedEl.style.left = pageX - draggedEl.offsetWidth / 2 + 'px';
         draggedEl.style.top = pageY - draggedEl.offsetHeight / 2 + 'px';
       }
-    moveAt(e.pageX, e.pageY)
-}//end Function
+}
 
 
 

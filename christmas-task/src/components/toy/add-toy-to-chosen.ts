@@ -1,27 +1,12 @@
-import { arrToys, Itoys } from "./example";
-import { container } from "./card";
-import { available, constant, filt} from "..";
-import { showMessage } from "./message";
+import { arrToys} from "./create-arr-toys";
+import {constant} from "../..";
+import { showMessage } from "./show-message";
 
 
-export function addFavorite(){
-if (localStorage.getItem('favor')){
-  constant.favoriteCount=Number(localStorage.getItem('favor'));
-}
-constant.favoriteToysCount.innerHTML=`${constant.favoriteCount}`;
 
 
-container.onclick = function(event:Event):void {
-    let target = event.target as HTMLElement; 
-    if (target.classList.contains('toy-card-img')){
-      constant.favoriteCount=Number(constant.favoriteToysCount.textContent);  
-      clickCard(target, constant.favoriteToysCount, constant.favoriteCount);
-    };
-  };
 
-}
-
-export function clickCard(target:HTMLElement, favoriteToysCount:HTMLElement, favoriteCount:number):void{
+export function addToytoChosen(target:HTMLElement, favoriteToysCount:HTMLElement, favoriteCount:number):void{
   //если не выбрана - добавить
     if(target.querySelector('.favorite-check')?.classList.contains('hide')){
         if(constant.favoriteCount>=20){
@@ -45,11 +30,5 @@ export function clickCard(target:HTMLElement, favoriteToysCount:HTMLElement, fav
     localStorage.setItem('favor', `${constant.favoriteCount}`)
     constant.favoriteToysCount.innerHTML=`${constant.favoriteCount}`;
     
-  }
+}
 
-export function filterByFavorite(){
-      constant.favoriteCheck.addEventListener('change', ()=>{
-      localStorage.setItem('favorite', `${constant.favoriteCheck.checked}`);
-      filt (arrToys, available.forms, available.colors, available.sizes);
-    })
-  }

@@ -5,14 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
         <title>Christmas-task</title>
     </head>
     <body>
         <header>
-          <button id="start-page-btn">стартовая страница</button>
+          <button id="start-page-btn">начало</button>
           <button id="toys-page-btn">игрушки</button>
-          <button id="tree-page-btn">елочка</button>
+          <button id="tree-page-btn">ёлочка</button>
             <form class="search" autocomplete="off">
               <input type="text" placeholder="Искать здесь..." autofocus id="search-input">
               <button type="submit"></button>
@@ -21,6 +24,7 @@
             <div class="favorite-toys-count" id="favorite-toys-count">0</div>
         </header>
         <main>
+          
           <article id="toys" class="hide">
             <div id="message-container">
               <div id="message"></div>
@@ -90,6 +94,7 @@
               </div>
           </article>
           <article id="start">
+            
             <div class="start-title-container">
               <h1 id="start-title">christmas task</h1>
               <button id="start-play">играть</button>
@@ -108,9 +113,20 @@
               </div>
               <p>выберите фон</p>
               <div id="tree-settings-bg"></div>
-              <div id="tree-settings-light">гирлянда</div>
+              <div id="tree-settings-light">
+                <div id="lightrope-btn-container">
+                  <p>гирлянда</p>
+                  
+                  <input type="checkbox" id="lightrope-btn"></input>
+                </div>
+                <div id="lightrope-colors">
+                </div>
+              </div>
             </section>
-            <section id="tree-tree"></section>
+            <section id="tree-tree">
+              
+            </section>
+            
             <section id="tree-toys">
               <p>игрушки</p>
               <div id="tree-toys-toys"></div>

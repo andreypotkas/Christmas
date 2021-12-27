@@ -1,0 +1,447 @@
+
+$globe-width:   12px;
+$globe-height:  28px;
+$globe-spacing: 40px;
+$globe-spread: 3px;
+$light-off-opacity: 0.4;
+
+.lightrope {
+        position: absolute !important;
+        max-width: 500px;
+        left: 50px;
+        top: -150px;
+        
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+        margin: -15px 0 0 0;
+        padding: 0;
+        pointer-events: none;
+        width: 100%;
+        height: 200px;
+        
+        li {
+          position: relative;
+          animation-fill-mode: both; 
+          animation-iteration-count:infinite;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: block;
+          width: $globe-width;
+          height: $globe-height;
+          border-radius: 50%;
+          margin: $globe-spacing/2;
+          display: inline-block;
+          background: rgba(0,247,165,1);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,247,165,1);
+          animation-name: flash-1;
+          animation-duration: 2s;
+          &:nth-child(1) {
+            background: rgba(0,255,255,1);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,0.5);
+            animation-name: flash-1;
+            animation-duration: 0.4s;
+            &::after{
+                transform: rotate(35deg);
+                top: -10px;
+            }
+            &::before{
+                top: -10px;
+            }
+          }
+          &:nth-child(2) {
+            background: rgba(247,0,148,1);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,1);
+            animation-name: flash-2;
+            animation-duration: 1.1s;
+            top: 23px;
+            left: -18px;
+            &::after{
+                transform: rotate(30deg);
+                left: 5px;
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(3) {
+            background: rgba(16, 0, 247, 0.5);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(16, 0, 247, 0.5) ;
+            animation-name: flash-1;
+            animation-duration: 1.1s;
+            top: 55px;
+            left: -25px;
+            &::after{
+                top: -15px;
+                left: 5px;
+                transform: rotate(15deg);
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(4) {
+            background: rgb(0, 247, 54);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(0, 247, 54);
+            animation-name: flash-3;
+            animation-duration: 1.1s;
+            top: 65px;
+            left: -30px;
+            &::after{
+                top: -15px;
+                left: 5px;
+                transform: rotate(15deg);
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(5) {
+            background: rgb(247, 0, 0);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(247, 0, 0);
+            animation-name: flash-2;
+            animation-duration: 1.1s;
+            top: 75px;
+            left: -35px;
+            &::after{
+                top: -15px;
+                left: 5px;
+                
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(6) {
+            background: rgb(243, 247, 0);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(243, 247, 0);
+            animation-name: flash-1;
+            animation-duration: 1.1s;
+            top: 75px;
+            left: -35px;
+            &::after{
+                top: -25px;
+                left: 5px;
+                transform: rotate(-15deg);
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(7) {
+            background: rgba(247,0,148,1);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,1);
+            animation-name: flash-2;
+            animation-duration: 1.1s;
+            top: 60px;
+            left: -35px;
+            &::after{
+                top: -35px;
+                left: 5px;
+                transform: rotate(-35deg);
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(8) {
+            background: rgb(0, 218, 247);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(0, 218, 247);;
+            animation-name: flash-3;
+            animation-duration: 1.1s;
+            top: 23px;
+            left: -38px;
+            &::after{
+                transform: rotate(-30deg);
+                left: 5px;
+                top: -30px;
+            }
+            &::before{
+                top: -8px;
+                left: 0px;
+            }
+          }
+          &:nth-child(9) {
+            background: rgba(0,255,255,1);
+            box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,0.5);
+            animation-name: flash-1;
+            animation-duration: 0.4s;
+            left: -40px;
+            &::after{
+                transform: rotate(35deg);
+                top: -10px;
+            }
+            &::before{
+                top: -10px;
+            }
+          }
+          
+          
+          &:before {
+            content: "";
+            position: absolute;
+            background: #222;
+            width: ($globe-width - 2);
+            height: $globe-height/3;
+            border-radius: 3px;
+            top: 0;
+            left: 1px;
+          }
+          &:after {
+            content: "";
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: $globe-spacing + 12;
+            height: ($globe-height/3 * 2);
+            border-bottom: solid #222 2px;
+            border-radius: 50%;
+          }
+          &:last-child:after {
+            content: none;
+          }
+          &:first-child {
+            margin-left: -$globe-spacing;
+          }
+        }
+      }
+      @keyframes flash-1 { 
+          0%, 100% { background: rgba(0,247,165,1);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,247,165,1);} 
+          50% { background: rgba(0,247,165,$light-off-opacity);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,247,165,0.2);}
+      }
+      @keyframes flash-2 { 
+          0%, 100% { background: rgba(0,255,255,1);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,1);} 
+          50% { background: rgba(0,255,255,$light-off-opacity);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(0,255,255,0.2);}
+      }
+      @keyframes flash-3 { 
+          0%, 100% { background: rgba(247,0,148,1);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,1);} 
+          50% { background: rgba(247,0,148,$light-off-opacity);
+          box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,0.2);}
+      }
+      @keyframes flash-blue { 
+        0%, 100% { background: rgb(0, 58, 247,1);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(1, 68, 255);} 
+        50% { background: rgba(0, 58, 247,$light-off-opacity);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(3, 83, 255, 0.2);}
+      }
+      @keyframes flash-red { 
+        0%, 100% { background: rgb(247, 0, 0);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(255, 1, 107);} 
+        50% { background: rgba(247, 0, 0,$light-off-opacity);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(255, 53, 3, 0.2);}
+      }
+      @keyframes flash-yellow { 
+        0%, 100% { background: rgb(202, 247, 0);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(255, 175, 1);} 
+        50% { background: rgba(202, 247, 0,$light-off-opacity);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(219, 205, 1, 0.966);}
+      }
+      @keyframes flash-white { 
+        0%, 100% { background: rgb(243, 243, 243);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgb(192, 197, 209);} 
+        50% { background: rgba(243, 243, 243,$light-off-opacity);
+        box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(231, 224, 186, 0.2);}
+    }
+      
+
+.lightrope2{
+          max-width: 500px;
+          left: 30px;
+          top: -350px;
+          li{
+            &:nth-child(1) {
+                display: none;
+              }
+            &:nth-child(9) {
+                display: none;
+              }
+            &:nth-child(8) {
+                &::after{
+                    display: none;
+                }
+                
+              }  
+          }
+      }
+
+.lightrope3{
+  max-width: 500px;
+  left:30px;
+  top: -500px;
+  li{
+    &:nth-child(1) {
+        display: none;
+      }
+    &:nth-child(9) {
+        display: none;
+      }
+    &:nth-child(8) {
+        display: none;
+      }  
+      &:nth-child(3) {
+          display: none;
+        }
+      &:nth-child(2) {
+          display: none;
+      }
+      &:nth-child(7) {
+          &::after{
+              display: none;
+          }
+    }
+  }
+}
+
+.lightrope-btn{
+  width: 50px;
+  height: 50px;
+  /* background: url('../../../assets/008-garland.png'); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+}
+.active-btn{
+  border: 2px red solid;
+}
+
+.blue-light{
+  li{
+    &:nth-child(1) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(2) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(3) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(4) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(5) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(6) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(7) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(8) {
+      animation-name: flash-blue;
+    }
+    &:nth-child(9) {
+      animation-name: flash-blue;
+    }
+  }
+}
+
+.red-light{
+  li{
+    &:nth-child(1) {
+      animation-name: flash-red;
+    }
+    &:nth-child(2) {
+      animation-name: flash-red;
+    }
+    &:nth-child(3) {
+      animation-name: flash-red;
+    }
+    &:nth-child(4) {
+      animation-name: flash-red;
+    }
+    &:nth-child(5) {
+      animation-name: flash-red;
+    }
+    &:nth-child(6) {
+      animation-name: flash-red;
+    }
+    &:nth-child(7) {
+      animation-name: flash-red;
+    }
+    &:nth-child(8) {
+      animation-name: flash-red;
+    }
+    &:nth-child(9) {
+      animation-name: flash-red;
+    }
+  }
+}
+
+.yellow-light{
+  li{
+    &:nth-child(1) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(2) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(3) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(4) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(5) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(6) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(7) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(8) {
+      animation-name: flash-yellow;
+    }
+    &:nth-child(9) {
+      animation-name: flash-yellow;
+    }
+  }
+}
+
+.white-light{
+  li{
+    &:nth-child(1) {
+      animation-name: flash-white;
+    }
+    &:nth-child(2) {
+      animation-name: flash-white;
+    }
+    &:nth-child(3) {
+      animation-name: flash-white;
+    }
+    &:nth-child(4) {
+      animation-name: flash-white;
+    }
+    &:nth-child(5) {
+      animation-name: flash-white;
+    }
+    &:nth-child(6) {
+      animation-name: flash-white;
+    }
+    &:nth-child(7) {
+      animation-name: flash-white;
+    }
+    &:nth-child(8) {
+      animation-name: flash-white;
+    }
+    &:nth-child(9) {
+      animation-name: flash-white;
+    }
+  }
+}
